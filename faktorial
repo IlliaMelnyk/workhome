@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+int main(){
+     int cislo,p=1;
+   cin>>cislo;
+   while(cislo<0){
+       cin>>cislo;
+   }
+   while(cislo>=1){
+       p*=cislo;
+       cislo--;
+   }
+    cout<<p;
+return 0;
+ }
