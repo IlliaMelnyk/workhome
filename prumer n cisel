@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main(){
+     int cislo,suma=0,n;
+     cin>>n;
+     while(n<0){
+         cin>>n;
+     }
+     for(int i=0;i<n;i++){
+         cin>>cislo;
+         suma+=cislo;
+     }
+     float prumer =float(suma/n);
+     cout<<"Prumer cisel: "<<prumer;
+ 
+return 0;
+ }
