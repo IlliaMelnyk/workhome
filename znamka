@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+ int suma=0, pocet=0, znamka;
+ do{
+ cin>>znamka; //čtení jednotlivých známek
+ suma+=znamka;
+ pocet++;
+ }
+ while(znamka!=5 and pocet!=12);
+ if(znamka!=5){
+ if(float(suma)/12<=1.5){ //přetypovat na dělení desetinných čísel
+ cout<<"Prospěl(a) s vyznamenáním."<<endl;
+ }
+ else{
+ cout<<"Prospěl(a). "<<endl;
+ }
+ }
+ else{
+ cout<<"Neprospěl(a). "<<endl;
+ }
+ return 0;
+ }
