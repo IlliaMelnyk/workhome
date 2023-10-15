@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+class Company{
+    private:
+    string m_name;
+    int m_earnings;
+    int m_age;
+    
+    public:
+    Company(string name,int earnings,int age){
+        m_name=name;
+        m_earnings=earnings;
+        m_age=age;
+    }
+   int getEarnings(){
+        return m_earnings;
+    }
+    string getName(){
+        return m_name;
+    }
+    void setEarnings(int earnings){
+        if(earnings<0){
+            cerr<<"earnings cant be negatice"<<endl;
+            cout<<"write positive price"<<endl;
+            m_earnings=0;
+        }else{
+            m_earnings=earnings;
+        }
+    }
+    
+    void setName(string name){
+        m_name=name;
+    }
+   void printInfo() {
+        cout<<"Company name: "<<m_name<<endl
+        <<"Earnings: "<<m_earnings<<endl
+        <<"Age: "<<m_age<<endl;
+    }
+};
+int main() {
+Company*company1=new Company("Ikea",2300,23);
+company1->printInfo();
+company1->setName("Adidas");
+company1->setEarnings(44500);
+company1->printInfo();
+delete company1;
+    return 0;
+}
