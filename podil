@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+int main(){
+ int c1,c2,podil=0;
+ cin>>c1>>c2;
+ while(c1>=c2){
+     c1-=c2;
+     podil++;
+ }
+ cout<<podil<<" zbytek "<<c1 ;
+ }
+    
