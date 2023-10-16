@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+ int cislo;
+ cin>>cislo;
+ if(cislo=0){
+if(cislo>0){
+    cout<<"Cislo je kladne";
+}else{
+    cout<<"Cislo je zaporne";
+}
+}else{
+    cout<<"Cislo je nula";
+}
+    return 0;
+}
+
+  
+
