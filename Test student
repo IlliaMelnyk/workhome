@@ -1,0 +1,71 @@
+#include <iostream>
+class Test{
+    private:
+    std::string m_type;
+    std::string m_name;
+    int m_point;
+    public:
+    Test(std::string type,std::string name,int point){
+        m_type=type;
+        m_name=name;
+        m_point=point;
+    }
+   Test(std::string type,std::string name){
+        m_type=type;
+        m_name=name;
+        m_point=0;
+   }
+   void setPoint(int point){
+       if(point<0){
+           std::cerr<<"Cant set negative point"<<std::endl;
+           m_point=0;
+       }else{
+           m_point=point;
+       }
+   }
+         int getPoint(){
+             return m_point;
+         }
+         void printInfo(){
+             std::cout<<"Type: "<<m_type<<std::endl
+             <<"Name: "<<m_name<<std::endl
+             <<"Point: "<<m_point<<std::endl;
+         }
+   };
+
+class Student{
+    private:
+    std::string m_studentName;
+    int m_pocetZiskanychBodu;
+    public:
+    Student(std::string studentName){
+        m_studentName=studentName;
+        m_pocetZiskanychBodu=0;
+    }
+    /*void evidujTest(){
+        if(m_studentName=tzname){
+            m_pocetZiskanychBodu+=point;
+        }else{
+            std::cerr<<"Chybova prihqlska";
+        }
+    }*/
+    int getZnamka(int pocetZiskanychBodu){
+        if(pocetZiskanychBodu<=100 and pocetZiskanychBodu>=80){
+            std::cout<<"Znamka A"<<std::endl;
+            }else if(pocetZiskanychBodu<=79 and pocetZiskanychBodu>=60){
+                std::cout<<"Znamka B"<<std::endl;
+            }else if(pocetZiskanychBodu<=59 and pocetZiskanychBodu>=50){
+                std::cout<<"Znamka C"<<std::endl;
+            }else if(pocetZiskanychBodu<=49 and pocetZiskanychBodu>=0){
+                std::cout<<"Znamka D"<<std::endl;
+    }
+}
+};
+
+int main() {
+   Test*test1=new Test("ZOO","prubezny",3);
+test1->printInfo();
+Student*student1 = new Student("Alex");
+student1->getZnamka();
+    return 0;
+}
