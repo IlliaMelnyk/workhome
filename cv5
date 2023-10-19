@@ -1,0 +1,115 @@
+#include <iostream>
+class Task{
+private:
+    static int s_counter;
+    float m_hours;
+    std::string  m_title;
+std::string m_id;
+public:
+Task(float hours,std::string name){
+    m_id= "UK" + std::to_string(s_counter);
+    s_counter++;
+    setHours(hours);
+    m_title=name;
+}
+public:
+    void setHours(float hours){
+    if(hours<0){
+        std::cerr<<"Error: you cannot set negative value in hours"<<std::endl;
+        m_hours=0;
+    }else{
+        m_hours=hours;
+    }
+
+}
+std::string getId(){
+    return m_id;
+
+}
+float getHours(){
+    return m_hours;
+
+}
+std::string getTitle(){
+    return m_title;
+
+}
+
+};
+int Task::s_counter=0;
+class Employee {
+private:
+    std::string m_name;
+    float m_contractSize;
+    float m_workedHours;
+public:
+    Employee(std::string name, float contractSize) {
+        m_name = name;
+        m_workedHours = 0;
+        setContractSize(contractSize);
+
+    }
+
+    void setContractSize(float contractSize) {
+        if ((contractSize >= 0) and (contractSize <= 1)) {
+            m_contractSize = contractSize;
+        } else {
+            std::cerr << "Error: Contract size must be [0,1]" << std::endl;
+            m_contractSize = 0;
+        }
+    }
+
+    std::string getName() {
+        return m_name;
+
+    }
+
+    float getWorkedHours() {
+        return m_workedHours;
+
+    }
+
+    float getContractSize() {
+        return m_contractSize;
+
+    }
+
+    void work(Task *task) {
+        float taskHours = task->getHours();
+        float mymaxHours = m_contractSize * 40;
+        if (m_workedHours + taskHours > mymaxHours) {
+            std::cerr << "Error: Too much hours" << std::endl;
+        } else {
+            m_workedHours += taskHours;
+        }
+
+
+    }
+
+    void printInfo() {
+        std::cout << "-----Employee------" << std::endl
+        << "Name: " << m_name << std::endl << "Worked " <<m_workedHours
+        <<" of "<<m_contractSize<<" hours"<<std::endl;
+
+    }
+    void resetWeekWork(){
+        m_workedHours=0;
+
+    }
+};
+
+int main() {
+    Task *task1 = new Task(23,"Clean windows");
+    Employee* Alex = new Employee("Alex", 0.75);
+    Alex->work(task1);
+    Alex->printInfo();
+
+//ukol ktery zabere 40 hodin panu karlovi
+//informace o karlovi
+//zmenit uvazek
+
+delete task1;
+delete Alex;
+
+    return 0;
+}
