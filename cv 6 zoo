@@ -1,0 +1,35 @@
+Na vstupu je řada znaků. Určete kolik se v ní nachází malých písmen anglické abecedy před první tečkou.
+#include <iostream>
+using namespace std;
+
+    int main() {
+        char znak;
+        int poc=0;
+       while(cin>>znak and znak!='.') {
+           if (znak >='a' and znak <= 'z') {
+               poc++;
+           }
+       }
+       cout<<poc;
+
+        return 0;
+    }
+
+Na vstupu je řada znaků. Určete kolik procent znaků (včetně bílých znaků) tvoří jiné znaky než malá a velká písmena anglické abecedy. Řada je ukončena znakem ‘*‘ (ten se do řady již nepočítá).
+#include <iostream>
+using namespace std;
+
+    int main() {
+        char znak;
+        int poc=0,celkem=0;
+       while(cin.get(znak) and znak!='*') {
+           if (!(znak >='a' and znak <= 'z') or(znak >='A' and znak <= 'Z')){
+               poc++;
+           }
+           celkem++;
+       }
+
+       cout<<float(poc)/celkem*100;
+
+        return 0;
+    }
