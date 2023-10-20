@@ -1,0 +1,100 @@
+#include <iostream>
+/*Na vstupu se nachází přirozené číslo N a za ním řada N celých čísel. Určete počet čísel větších než první zadané číslo řady.*/
+using namespace std;
+int main() {
+int n,cislo,pocet=0,cislo1;
+   cin>>n;
+   cin>>cislo1;
+   for(int i=1;i<n;i++){
+       cin>>cislo;
+       if(cislo1<cislo){
+       pocet++;
+   }
+   }
+cout<<pocet;
+    return 0;
+}
+Na vstupu je řada celých nezáporných čísel ukončena libovolným záporným (toto číslo do řady nepatří). Určete největší sudé číslo.
+
+#include <iostream>
+using namespace std;
+
+    int main() {
+        int cislo,pocet=0,max=-1;
+        while (cin>>cislo and cislo>=0){
+            if(cislo % 2 == 0 and cislo>max){
+                max=cislo;
+            }
+        }
+        if(max==-1){
+            cout<<"zadne sude cislo";
+        }else{
+            cout<<max;
+        }
+        return 0;
+    }
+Na vstupu se nachází dvojice reálných čísel. Poslední dvojicí je dvojice 0 0 (tato do řady nepatří). Určete počet dvojic ve kterých byla zadána stejná čísla.
+#include <iostream>
+using namespace std;
+
+    int main() {
+        int cislo1,cislo2,poc=0;
+        cin>>cislo1>>cislo2;
+        while(cislo1!=0 or cislo2!=0){
+            if(cislo1=cislo2){
+                poc++;
+            }
+            cin>>cislo1>>cislo2;
+        }
+        cout<<poc;
+
+        return 0;
+    }
+
+Na vstupu je řada celých čísel ukončené číslem -333 (toto číslo do řady nepatří). Určete počet sudých čísel.
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int cislo,poc=0;
+    cin>>cislo;
+    while (cislo!=-333){
+        if(cislo % 2 == 0){
+        poc++;
+        }
+        cin>>cislo;
+    }
+cout<<poc;
+
+    return 0;
+}
+
+Na vstupu je řada celých čísel ukončené číslem -333 (toto číslo do řady nepatří). Určete aritmetický průměr lichých čísel.
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int cislo,pocL=0.sumaL=0;
+    cin>>cislo;
+    while (cislo!=-333){
+        if(cislo % 2 != 0){
+        pocL++;
+        sumaL+= cislo
+        }
+        cin>>cislo;
+    }
+    if(pocL>0){
+cout<<float(sumaL)/pocL;
+}else{
+    cout<<"zadna licha cisla";
+}
+    return 0;
+}
+
+
+
+
+
