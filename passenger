@@ -1,0 +1,127 @@
+#include <iostream>
+class Passenger{
+    std::string m_name;
+    int m_age;
+    int m_money;
+    float m_distance;
+    int m_paid;
+    public:
+    Passenger(std::string name,int age){
+        m_name=name;
+        m_age=age;
+        m_money;
+        m_distance=0;
+        m_paid=0;
+    }
+    std::string getName(){
+        return m_name;
+    }
+    int getAge(){
+        return m_age;
+    }
+    int getMoney(){
+        return m_money;
+    }
+    int getDistance (){
+        return m_distance;
+    }
+    int getPaid(){
+        return m_paid;
+        
+    }
+        void greet(){
+            std::cout<<"Hello i am "<<m_name<<" Iam travelling "<<m_distance<<" km "<<" I paid "<<m_paid<<" Kc "
+            <<" And now i have "<<m_money<<" Kc"<<std::endl;
+      }
+    void setMoney(int money){
+        m_money=money;
+    }
+    void setPaid(int paid){
+        m_paid=paid;
+    }
+    void setDistance(float distance){
+        m_distance=distance;
+        
+    }
+    
+};
+class Vehicle{
+     int m_maxKapacity;
+     int m_pricePerKm;
+    int m_occupancy;
+    int m_totalEarn;
+    public:
+    Vehicle(int pricePerKm,int maxKapacity){
+        m_maxKapacity=maxKapacity;
+        m_pricePerKm=pricePerKm;
+        m_occupancy= 0;
+        m_totalEarn= 0;
+    }
+   void setMaxKapacity(int maxKapacity){
+        if(maxKapacity>=2 and maxKapacity<=5){
+            m_maxKapacity=maxKapacity;
+        }else{
+            std::cerr<<"Error kapacity";
+        }
+    }
+    void addPassenger(Passenger*passenger){
+        float distance = passenger->getDistance();
+        int price = m_pricePerKm*distance;
+        passenger->setPaid(price);
+        std::string name = passenger->getName();
+        int age = passenger->getAge();
+        int money =  passenger->getMoney();
+        if(m_occupancy<m_maxKapacity and age >=18 and money>=price){
+            m_occupancy++;
+            passenger->setMoney(money-price);
+            m_totalEarn+=price;
+            passenger->greet();
+            }else{
+                std::cout<<passenger->getName()<<" Neakceptovan"<<std::endl;
+            }
+    }
+    void depart(){
+        if(m_occupancy>=m_maxKapacity/2){
+            std::cout<<"Vozidlo s obsazeni "<<m_occupancy<<"/"<<m_maxKapacity<<" odjezdi"<<std::endl;
+        }
+            
+        }
+        
+    void unloadPassenger(){
+        m_occupancy=0;
+        m_pricePerKm*=2;
+        std::cout<<m_totalEarn;
+    }
+
+};
+
+int main()  {
+   Passenger* passenger1 = new Passenger("Samuel", 19);
+    Passenger* passenger2 = new Passenger("Dan", 19);
+    Passenger* passenger3 = new Passenger("Pavel", 19);
+    Passenger* passenger4 = new Passenger("Bobo", 19);
+    Vehicle* vehicle1 = new Vehicle(10, 5);
+    passenger1->setDistance(10);
+    passenger1->setMoney(100);
+    passenger2->setDistance(10);
+    passenger2->setMoney(10);
+    passenger3->setDistance(10);
+    passenger3->setMoney(100);
+    passenger4->setDistance(10);
+    passenger4->setMoney(100);
+    vehicle1->addPassenger(passenger1);
+    vehicle1->addPassenger(passenger2);
+    vehicle1->addPassenger(passenger3);
+   // vehicle1->depart();
+    vehicle1->addPassenger(passenger4);
+    vehicle1->depart();
+    vehicle1->unloadPassenger();
+
+    delete passenger1;
+    delete passenger2;
+    delete passenger3;
+    delete passenger4;
+    delete vehicle1;
+    return 0;
+
+}
