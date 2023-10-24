@@ -1,0 +1,106 @@
+
+#include <iostream>
+using namespace std;
+
+class Item{
+private:
+    string m_itemName;
+    float m_itemPrice;
+
+public:
+    Item(string itemName, int itemPrice){
+        m_itemName = itemName;
+        m_itemPrice = itemPrice;
+    }
+
+    string getItemName(){
+        return m_itemName;
+    }
+
+    float getItemPrice(){
+        return m_itemPrice;
+    }
+};
+
+class Cart{
+private:
+    string m_cartOwner;
+    int m_itemsCount;
+    float m_itemsPrice;
+
+public:
+    Cart(string cartOwner) {
+        m_cartOwner=cartOwner;
+        int m_itemsCount=0;
+    float m_itemsPrice=0;
+
+    }
+
+    //ziskani jmena majitele kosiku
+    string getCartOwner(){
+        return m_cartOwner;
+    }
+
+    //ziskani poctu zbozi v kosiku
+    int getItemsCount(){
+        return m_itemsCount;
+    }
+
+    //ziskani poctu ceny v kosiku
+    float getItemsPrice(){
+        return m_itemsPrice;
+    }
+   
+   std::string getCartInfo(){
+        std::cout << "Vlastnikem kosiku je: " + getCartOwner() + " Pocet zbozi v kosiku je: " 
+        + to_string(getItemsCount()) + " Cena bez dnaneni a slevy je: " +
+                to_string(getItemsPrice())<< endl;
+    }
+    float getCena(){
+      return m_itemsPrice+=m_itemsPrice*0.21;
+        
+    }
+    float getDiscount(){
+        return getCena()-(getCena()*0.1);
+    }
+
+void getFinalPrice(){
+    if(getItemsPrice()>=1500 and getItemsCount()>=3){
+        std::cout<<"Cena z zdanenim a akci "<<getDiscount()<<std::endl;
+    }else{
+        std::cout<<"Cena bez akci "<<getCena()<<std::endl;
+    }
+}
+ void addToCart(Item* item){
+        m_itemsCount++;
+        m_itemsPrice += item->getItemPrice();
+    }
+
+    void clearCart(){
+        m_itemsCount = 0;
+        m_itemsPrice=0;
+    }
+};
+
+
+int main()  {
+   Cart* cart = new Cart("Pavel Novak");
+    Item* item = new Item("Jidlo pro psa", 500);
+    Item* item2 = new Item("Sampon", 500);
+    Item* item3 = new Item("Chipsy", 500);
+cout << "Nazev zbozi: " <<item->getItemName() << endl;
+    cout << "Cema zbozi: " <<item->getItemPrice()<< endl;
+cout << "Nazev zbozi: " <<item2->getItemName() << endl;
+    cout << "Cema zbozi: " <<item2->getItemPrice()<< endl;
+cart->addToCart(item);
+    cart->addToCart(item2);
+    cart->addToCart(item3);
+    
+
+    cart->getFinalPrice();
+    //cart->clearCart();
+    cart->getCartInfo();
+
+    return 0;
+}
+
