@@ -1,0 +1,86 @@
+#include <iostream>
+
+using namespace std;
+
+class Container{
+    float m_weight;
+    std::string m_description;
+    bool m_flag;
+    public:
+    Container(float weight,std::string description){
+        m_weight=weight;
+        m_description=description;
+        m_flag=false;
+    }
+    void setFlag(bool flag){
+        m_flag=flag;
+    }
+    std::string getDescription(){
+        return m_description;
+    }
+      float getWeight(){
+        return m_weight;
+    }
+    char getFlag(){
+        return m_flag;
+    }
+  void setWeight(float weight){
+    if(m_flag=false){
+        m_weight=weight;
+    }else{
+        std::cerr<<"Erorr weight cant change now"<<std::endl;
+        m_weight=0;
+    }
+}
+
+};
+class Ferry{
+    int m_amountOfConteiners;
+    float m_maxCarryCapacity;
+    float m_currentCarryCapacity;
+    public:
+    Ferry(float maxCarryCapacity){
+        m_amountOfConteiners=0;
+        m_maxCarryCapacity=maxCarryCapacity;
+        m_currentCarryCapacity=0;
+    }
+void addContainer(Container* container){
+   float weight=container->getWeight();
+    std::string description=container->getDescription();
+    bool flag=container->getFlag();
+   m_currentCarryCapacity+=weight;
+    if(m_maxCarryCapacity< m_currentCarryCapacity){
+        std::cerr<<"Error: "<<description<<" dont added"<<std::endl;
+        m_currentCarryCapacity-=weight;
+    }else{
+        m_amountOfConteiners++;
+        container->setFlag(true);
+       
+        
+    }
+}
+   void printInfo(){
+       std::cout<<"Amount of container on ferry "<<m_amountOfConteiners<<std::endl
+    <<" Current weight on ferry "<<m_currentCarryCapacity<<std::endl
+    <<"Ferry can else include "<<m_maxCarryCapacity - m_currentCarryCapacity<<std::endl;
+    //<<container->setFlag()<<std::endl;
+}
+    
+    
+    
+};
+int main() {
+  Container *container1= new Container(500,"Container 334 from Ukraine");
+  Container *container2= new Container(300,"Container 668 from CR");
+  Container *container3= new Container(600,"Container 555 from UK");
+  Ferry* ferry1=new Ferry(1290);
+  ferry1->addContainer(container1);
+ferry1->addContainer(container2);
+ ferry1->addContainer(container3);
+ container1->setWeight(300);
+ ferry1->printInfo();
+  delete container1;
+  delete container2;
+   delete container3;
+    return 0;
+}
