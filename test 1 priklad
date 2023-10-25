@@ -1,0 +1,238 @@
+#include <iostream>
+
+using namespace std;
+
+class Item {
+    string m_name;
+    float m_price;
+public:
+    Item(string name, float price) {
+        m_name = stringCheck(name);
+        m_price = numberCheck(price);
+    }
+
+    string getName() {
+        return m_name;
+    }
+
+    float getPrice() {
+        return m_price;
+    }
+
+    string stringCheck(string input) {
+        if (input != "") {
+            return input;
+        } else {
+            cerr << "Wrong input! of: " << input << endl;
+            return "Null";
+        }
+    }
+
+    float numberCheck(float input) {
+        if (input < 0) {
+            cerr << "Wrong input! of: " << input << endl;
+            return 0;
+        } else {
+            return input;
+        }
+    }
+};
+
+class ShoppingCart {
+    string m_name;
+    int m_count;
+    float m_price;
+public:
+    ShoppingCart(string name) {
+        m_name = stringCheck(name);
+        m_count = 0;
+        m_price = 0;
+    }
+
+    int getCount() {
+        return m_count;
+    }
+
+    float getPrice() {
+        return m_price;
+    }
+
+    string getName() {
+        return m_name;
+    }
+
+    void addToCart(Item *item) {
+        m_price += item->getPrice();
+        m_count++;
+    }
+
+    void emptyCart() {
+        float price = getPrice() + (getPrice() / 100) * 21;
+        cout << "Your purchase costs: " << price << endl;
+        if (price > 1500 and getCount() > 3) {
+            price = price - (price / 100) * 10;
+            cout << "There was an additional sale of 10%, Your purchase now costs: " << price << endl;
+        }
+        m_price = 0;
+        m_count = 0;
+    }
+
+    string stringCheck(string input) {
+        if (input != "") {
+            return input;
+        } else {
+            cerr << "Wrong input!" << endl;
+            return "Null";
+        }
+    }
+};
+
+int main() {
+    Item *Milk = new Item("Milk", 200);
+    Item *Meat = new Item("Meat", 250);
+    Item *Cigarretes = new Item("Cigarretes", 1000);
+    Item *Soj = new Item("Soj", -200);
+
+    ShoppingCart *Adam = new ShoppingCart("Adam");
+
+    Adam->addToCart(Cigarretes);
+    cout << "Price is: " << Adam->getPrice() << " and number of items is: " << Adam->getCount() << endl;
+    Adam->addToCart(Meat);
+    Adam->addToCart(Milk);
+    Adam->addToCart(Milk);
+    cout << "Price is: " << Adam->getPrice() << " and number of items is: " << Adam->getCount() << endl;
+    Adam->emptyCart();
+    Adam->addToCart(Cigarretes);
+    cout << "Price is: " << Adam->getPrice() << " and number of items is: " << Adam->getCount() << endl;
+    return 0;
+}
+
+
+
+
+
+
+
+#include <iostream>
+
+class Ticket {
+private:
+    std::string m_name;
+    std::string m_category;
+    float m_ticketPrice;
+    int m_minutesValidity;
+    std::string m_validityStart;
+    bool m_isValidated = false;
+
+public:
+    Ticket(std::string name, std::string category, float ticketPrice, int minutesValidity) {
+        m_name = name;
+        m_category = category;
+        m_ticketPrice = ticketPrice;
+        m_minutesValidity = minutesValidity;
+    }
+
+    bool getIsValidated() {
+        return m_isValidated;
+    }
+
+    void setIsValidated() {
+        m_isValidated = true;
+    }
+
+    void setValidityStart() {
+        m_validityStart = "13:00";
+    }
+
+    std::string getCategory() {
+        return m_category;
+    }
+
+    std::string getName() {
+        return m_name;
+    }
+
+    float getTicketPrice() {
+        return m_ticketPrice;
+    }
+
+    int getMinutesValidity() {
+        return m_minutesValidity;
+    }
+};
+
+class Automat {
+private:
+    int m_ticketsValidated;
+    float m_totalTicketPrice;
+    int m_children;
+    int m_adults;
+    int m_elderly;
+
+public:
+    Automat() {
+        m_ticketsValidated = 0;
+        m_totalTicketPrice = 0;
+        m_children = 0;
+        m_adults = 0;
+        m_elderly = 0;
+    }
+
+    void validateTicket(Ticket* ticket) {
+        std::string category = ticket->getCategory();
+        std::string name = ticket->getName();
+        float price = ticket->getTicketPrice();
+        int minutesValidity = ticket->getMinutesValidity();
+        bool isValidated = ticket->getIsValidated();
+
+        if (!isValidated && !category.empty() && !name.empty() && price > 0 && minutesValidity > 0) {
+            ticket->setIsValidated();
+            ticket->setValidityStart();
+
+            if (category == "child") {
+                m_children++;
+                m_ticketsValidated++;
+                m_totalTicketPrice += ticket->getTicketPrice();
+            }
+            else if (category == "adult") {
+                m_adults++;
+                m_ticketsValidated++;
+                m_totalTicketPrice += ticket->getTicketPrice();
+            }
+            else if (category == "elderly") {
+                m_elderly++;
+                m_ticketsValidated++;
+                m_totalTicketPrice += ticket->getTicketPrice();
+            }
+            else std::cerr << "Invalid category";
+        }
+        else std::cerr << "At least one of the parameters is incorrect or the ticket is already validated." << std::endl;
+    }
+
+    void printStatistics() {
+        float averageTicketPrice = m_totalTicketPrice / (float) m_ticketsValidated;
+
+        std::cout << "Total ticket price: " << m_totalTicketPrice << ", tickets validated: " << m_ticketsValidated
+        << ", children: " << m_children << ", adults: " << m_adults << ", elderly: " << m_elderly << ", average ticket price: " << averageTicketPrice << std::endl;
+    }
+};
+
+int main() {
+    Automat* automat = new Automat();
+
+    Ticket* t1 = new Ticket("Peter", "adult", 10.5, 30);
+    Ticket* t2 = new Ticket("Paul", "child", 10, 30);
+    Ticket* t3 = new Ticket("Abigail", "elderly", 15, 30);
+    Ticket* t4 = new Ticket("", "joe", -10, -30);
+
+    automat->validateTicket(t1);
+    automat->validateTicket(t2);
+    automat->validateTicket(t3);
+    automat->validateTicket(t4);
+
+    automat->validateTicket(t2);
+
+    automat->printStatistics();
+
+    return 0;
+}
