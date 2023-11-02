@@ -1,0 +1,105 @@
+#include <iostream>
+#include <vector>
+class Customer{
+    std::string m_name;
+    int m_id;
+    static int s_counter;
+    float m_discount;
+    float m_totalPurchaseCzk;
+public:
+    Customer(std::string name) : Customer(name ,5){
+       /* m_name=name;
+        m_id=s_counter;
+        s_counter++;
+        m_discount=5;
+        m_totalPurchaseCzk=0*/
+    }
+    Customer(std::string name,float discount){
+        m_name= name;
+        m_discount=discount;
+        m_id=s_counter;
+        s_counter++;
+        m_totalPurchaseCzk=0;
+
+    }
+    std::string getName(){
+        return  m_name;
+    }
+    int getId(){
+        return m_id;
+    }
+    float getDiscount(){
+        return m_discount;
+    }
+    void addPurchase(float newPurchaseCzk){
+        increaseDicsount(newPurchaseCzk);
+        m_totalPurchaseCzk+=newPurchaseCzk;
+    }
+private:
+    void increaseDicsount(float newPurchaseCzk){
+        int beforePurchase = static_cast<int>(m_totalPurchaseCzk)/10000;
+                int afterPurchase = static_cast<int>(m_totalPurchaseCzk+newPurchaseCzk)/10000;
+if(beforePurchase < afterPurchase){
+    float discountIncrease = static_cast<float>(afterPurchase-beforePurchase);
+    m_discount = m_discount + discountIncrease>20? 20: m_discount + discountIncrease;
+}
+    }
+};
+int Customer::s_counter=0;
+
+class CustomerRegistr{
+    std::vector<Customer*> m_customer;
+
+public:
+    CustomerRegistr(){
+
+    }
+    Customer* createCustomer(std::string type,std::string name){
+        Customer* newCustomer= nullptr;
+        if(type=="Vip"){
+            newCustomer = new Customer(name,10);
+                    m_customer.push_back(newCustomer);
+        }else if(type=="Basic"){
+            newCustomer = new Customer(name);
+            m_customer.push_back(newCustomer);
+        }else if(type=="Corporate"){
+            newCustomer = new Customer(name,3);
+            m_customer.push_back(newCustomer);
+
+        }
+        return newCustomer;
+    }
+    Customer* findCustomerById(int id){
+        for(Customer* addCustomer:m_customer){
+            if(addCustomer->getId()==id){
+                return addCustomer;
+            }
+        }
+        return nullptr;
+    }
+    std::vector<Customer*> findCustomerByName(std::string name){
+        std::vector<Customer*> customerRight;
+        for(Customer* addCustomer:m_customer) {
+            if (addCustomer->getName() == name) {
+                customerRight.push_back(addCustomer);
+            }
+            }
+        return  customerRight;
+        }
+    ~CustomerRegistr(){
+        for(Customer* newCustomer:m_customer){
+            delete Customer;
+            
+        }
+    }
+
+};
+
+int main() {
+    CustomerRegistr *alza = new CustomerRegistr();
+    alza->createCustomer("Vip", "David");
+    alza->createCustomer("Basic", "Tomas");
+    alza->createCustomer("Corporate", "Tomas");
+std::vector<Customer*> searchRegistr = alza->findCustomerByName(1)
+    return 0;
+}
