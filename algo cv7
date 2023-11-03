@@ -1,0 +1,162 @@
+Doplňte chybějící části algoritmu tak, aby po jeho proběhnutí byly v proměnné p2 hodnoty jako na obrázku za předpokladu, že v proměnné p1 byly hodnoty uvedené na obrázku.
+p1	0	1	2	3	4	5	6	7	8	9
+p2	18	17	16	15	14	13	12	11	10	9
+for(int i = 9; i>=0; i--){
+p2[i]=p1[9]+p1[9-i];
+Vytvořte datový typ Tpole, který umožní uchovávat v proměnné tohoto typu 1000 hodnot typu float.
+Vytvořte funkci, která spočítá součet všech hodnot v poli (typu Tpole) předaném jako parametr.
+Vytvořte funkci, která spočítá aritmetický průměr všech hodnot v poli (typu Tpole) předaném jako parametr.
+Vytvořte funkci, která spočítá aritmetický průměr všech hodnot v poli (typu Tpole) předaném jako parametr.
+#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+float soucetPole(Tpole pole,int pocet){
+    float soucet=0;
+    for(int i=0;i<pocet;i++){
+        soucet+=pole[i];
+    }
+    
+    return soucet;
+}
+
+float prumerPole(Tpole pole,int pocet){
+    return soucetPole(pole,pocet)/pocet;
+}
+
+int main(){
+    return 0;
+}
+Na vstupu se nachází posloupnost reálných čísel. Počet čísel není znám, ale předpokládejte, že není větší než 1000. Určete, kolik čísel bylo menších něž poslední číslo z řady.
+#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+int main() {
+Tpole p;
+    int poc=0;
+    while(cin>>p[poc]){
+        poc++;
+    }
+    for(int i=0;i<poc;i++){
+        if(p[i]<p[poc-1]){
+            cout<<p[i]<<",";
+        }
+    }
+    return 0;
+}
+Na vstupu je řada reálných čísel ukončená číslem -333 (toto číslo do řady již nepatří). Předopokládejte, že jich je maximálně 1000. Vypište všechna nadprůměrná čísla z řady.
+#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+float soucetPole(Tpole pole,int pocet){
+    float soucet=0;
+    for(int i=0;i<pocet;i++){
+        soucet+=pole[i];
+    }
+    return soucet;
+}
+float prumerPole(Tpole pole,int pocet){
+    return soucetPole(pole,pocet)/pocet;
+}
+int main(){
+    Tpole p;
+    int poc=0;
+    while(cin>>p[poc] and p[poc]!=333){
+        poc++;
+    }
+    float prumer=prumerPole(p,poc);
+    for(int i=0;i<poc;i++){
+        if(p[i]>prumer){
+            cout<<p[i]<<",";
+        }
+    }
+    return 0;
+}
+Vytvořte proceduru pro načtení vektoru N reálných čísel a proceduru pro výpis N reálných čísle. Výpis čísel vhodně formátujte.
+void nactiPole(Tpole pole,int pocet){
+    for(int i=0;i<pocet;i++){
+        cin>>pole[i];
+    }
+}
+void vypisPole(Tpole pole ,int pocet){
+    for(int i=0;i<pocet;i++){
+        cout<<pole[i]<<",";
+    }
+}
+int main(){
+    Tpole p;
+    int poc=5;
+    nactiPole(p,poc);
+    vypisPole(p,poc);
+    return 0;
+}
+
+Vytvořte funkci pro výpočet skalárního součinu dvou stejně velkých reálných vektorů.
+#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+float skalSouc(Tpole p1,Tpole p2,int pocet){
+    float soucet=0;
+    for(int i=0;i<pocet;i++){
+        soucet+=p1[i]*p2[i];
+    }
+    
+    return soucet;
+}
+Na vstupu jsou dvojice hodnot, řada končí dvojicí 0 0. Hodnoty rozdělte do dvou vektorů a spočítejte jejich skalární součin. Dále určete, který z vektorů má větší aritmetický průměr.
+#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+void nactiPole(Tpole pole,int pocet){
+    for(int i=0;i<pocet;i++){
+        cin>>pole[i];
+    }
+}
+void vypisPole(Tpole pole ,int pocet){
+    for(int i=0;i<pocet;i++){
+        cout<<pole[i]<<" ";
+    }
+}
+float skalSouc(Tpole p1,Tpole p2,int pocet){
+    float soucet=0;
+    for(int i=0;i<pocet;i++){
+        soucet+=p1[i]*p2[i];
+    }
+    
+    return soucet;
+}
+int main() {
+Tpole p1,p2;
+int pocet=0;
+cin>>p1[pocet]>>p2[pocet];
+while(!(p1[pocet]==0 and p2[pocet]==0)){
+   pocet++;
+   cin>>p1[pocet]>>p2[pocet];
+}
+
+vypisPole(p1,pocet);
+vypisPole(p2,pocet);
+ cout<<skalSouc(p1,p2,pocet);
+
+    return 0;
+}
+Na vstupu je řada celých čísel ukončená číslem 0 (toto číslo do řady již nepatří). Určete, kolik se v čílsech vyskytovalo jednotlivých číslic (kolik nul, jedniček, ...).
+#include <iostream>
+using namespace std;
+int main() {
+int pocet=0,n,cislo;
+int pocty[10]={0};
+cin>>cislo;
+while(cin>>cislo and cislo!=0){
+    if(cislo<0){
+        cislo=-cislo;
+    }
+    while(cislo!=0){
+       pocty[cislo%10]++;
+       cislo/=10;
+    }
+}
+for(int i=0;i<10;i++){
+    cout<<i<<": "<<pocty[i]<<endl;
+}
+    return 0;
+}
