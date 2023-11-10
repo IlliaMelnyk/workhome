@@ -1,0 +1,162 @@
+Vytvořte proceduru, co vynásobí vektor zadaným číslem.#include <iostream>
+using namespace std;
+typedef float Tpole[1000];
+float NasobeniPole(Tpole pole,float cislo,int kolik){
+  for(int i=0;i<kolik;i++){
+    pole[i]*=cislo;
+  }
+}
+void vypisPole(Tpole pole ,int pocet){
+for(int i=0;i<pocet;i++){
+    cout<<pole[i]<<",";
+}
+}
+void nactiPole(Tpole pole,int pocet){
+    for(int i=0;i<pocet;i++){
+        cin>>pole[i];
+    }
+}
+int main() {
+  Tpole pole;
+  int pocet;
+  cin>>pocet;
+  nactiPole(pole,pocet);
+  NasobeniPole(pole,1.25,pocet);
+    vypisPole(pole,pocet);
+}
+
+Vytvořte proceduru, co jako parametry přijme dva vektory a počet jejich prvků a do prvního z nich uloží součet obou vektorů.
+void secti(Tpole p1,Tpole p2,int kolik){
+  for(int i=0;i<kolik;i++){
+    p1[i]+=p2[i];
+  }
+}
+int main() {
+  Tpole pole1,pole2;
+  int pocet;
+  cin>>pocet;
+  nactiPole(pole1,pocet);
+  nactiPole(pole2,pocet);
+  secti(pole1,pole2,pocet);
+    vypisPole(pole1,pocet);
+}
+Vytvořte proceduru, co obratí pořadí prvků v zadaném polivoid obratPrvky(Tpole p1,int pocet){
+    for(int i=0;i<pocet/2;i++){
+        p1[i]+=p1[pocet-1-i];
+        p1[pocet-1-i]=p1[i]-p1[pocet-1-i];
+        p1[i]-=p1[pocet-1-i];
+    }
+    /*float pom=p1[i];
+     p[i]=p[kolik-1-i];
+     p[kolik-1-i]=pom
+     */
+}
+void nactiPole(Tpole pole,int pocet){
+    for(int i=0;i<pocet;i++){
+        cin>>pole[i];
+    }
+}
+int main() {
+  Tpole pole1,pole2;
+  int pocet;
+  cin>>pocet;
+  nactiPole(pole1,pocet);
+  //nactiPole(pole2,pocet);
+    obratPrvky(pole1,pocet);
+    vypisPole(pole1,pocet);
+}
+Vytvořte datový typ Tmatice. Proměnné tohoto datového typu budou schopny uchovat 1000 × 1000 hodnot typu float.
+pouze jedničkami,
+#include <iostream>
+using namespace std;
+typedef float Tpole[100];
+typedef Tpole Tmatice[100];
+void vypisPole(Tpole pole ,int pocet){
+for(int i=0;i<pocet;i++){
+    cout<<pole[i]<<" ";
+}
+cout<<endl;
+}
+void vypisMatice(Tmatice mat,int radky,int sloupcy) {
+    for (int i = 0; i < radky; i++) {
+        vypisPole(mat[i], sloupcy);
+    }
+}
+void jednicky(Tmatice mat,int pocet,int pocet1){
+    for(int i=0;i<pocet;i++) {
+        for(int a=0;a<pocet1;a++)
+        mat[i][a] = 1;
+    }
+}
+
+int main() {
+  Tmatice mat;
+  int radky,sloupcy;
+  cin>>radky>>sloupcy;
+  jednicky(mat,radky,sloupcy);
+    vypisMatice(mat,radky,sloupcy);
+Vytvořte datový typ pro dvourozměrné pole. Vytvořte proceduru na výpis matice. Od uživatele načťte rozměr čtvercové matice a naplňte ji (uvedené příklady jsou pro n=3):
+na hlavní diagonálu vložte nuly
+void nulaHlavni(Tmatice mat,int pocet){
+    for(int i=0;i<pocet;i++) {
+        mat[i][i]=0;
+    }
+}
+void vedlDiagonal2(Tmatice mat,int pocet) {
+    for (int i = 0; i < pocet; i++) {
+        mat[i][pocet-1-i] = 2;
+    }
+}
+
+int main() {
+  Tmatice mat;
+  int pocet;
+  cin>>pocet;
+  jednicky(mat,pocet);
+    vedlDiagonal2(mat,pocet);
+    nulaHlavni(mat,pocet);
+    vypisMatice(mat,pocet);
+
+}
+
+void poRadcich(Tmatice mat,int pocet) {
+    //int pom=1;
+    for (int i = 0; i < pocet; i++) {
+        for (int a = 0; a < pocet; a++) {
+            mat[i][a]=pocet*i+a+1;
+           // mat[i][a]=pom++
+        }
+    }
+}
+void poSloupcich(Tmatice mat,int pocet) {
+    //int pom=1;
+    for (int i = 0; i < pocet; i++) {
+        for (int a = 0; a < pocet; a++) {
+            mat[a][i]=pocet*i+a+1;
+            // mat[i][a]=pom++
+        }
+    }
+}
+
+int main() {
+  Tmatice mat;
+  int pocet;
+  cin>>pocet;
+  jednicky(mat,pocet);
+    vedlDiagonal2(mat,pocet);
+    nulaHlavni(mat,pocet);
+    poRadcich(mat,pocet);
+    poSloupcich(mat,pocet);
+    vypisMatice(mat,pocet);
+
+}
+
+Vytvořte proceduru pro načtení matice N × M zadávanou po řádcích (N - počet řádků, M - počet sloupců).
+
+void nactiMatice(Tmatice mat,int radky,int sloupcy){
+    for(int i=0;i<radky;i++){
+        nactiPole(mat[i],sloupcy);
+    }
+}
+
+
